@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
   <arg name="debug" default="false" />
   <arg unless="$(arg debug)" name="launch_prefix" value="" />
@@ -9,7 +10,7 @@
   <arg name="period" default="0.0071"/>
 
   <!-- Start MELFA driver -->
-  <node name="melfa_driver" pkg="melfa_driver" type="melfa_driver_node">
+  <node name="melfa_driver" pkg="melfa_driver" type="melfa_driver_node" output="screen">
     <param name="robot_ip" value="$(arg robot_ip)"/>
     <param name="realtime" value="$(arg realtime)"/>
     <param name="period" value="$(arg period)"/>
@@ -23,7 +24,7 @@
   </node>
 
   <!-- Load robot description -->
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find melfa_description)/urdf/rv7fl.urdf.xacro'" />
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find melfa_description)/urdf/rv4fl.urdf.xacro'" />
 
   <!-- Load joint controller configurations -->
   <rosparam file="$(find melfa_driver)/config/controller.yaml" command="load"/>
